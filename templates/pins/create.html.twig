@@ -1,0 +1,18 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Pinterest clone</title>
+</head>
+<body>
+    <h1>Create pin</h1>
+
+    {# commentaire twig qui n'apparaît pas dans l'inspecteur #}
+    
+    {{ form_start(monFormulaire) }}
+        {{ form_widget(monFormulaire) }}
+        <input type="submit" value="Create Pin">
+    {{ form_end(monFormulaire) }}
+    
+</body>
+</html>

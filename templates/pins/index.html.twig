@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Pinterest Clone</title>
+</head>
+<body>
+    <h1>All Pins</h1>
+
+    {{ random(['apple', 'orange', 'citrus']) }}
+    {% set pins_count = pins|length %}
+    <p>{{ pins_count }} pins</p>
+    {{'action :' | upper}}
+
+    <a href="{{ path('app_pins_create') }}">Create Pin</a>
+
+    {% for pin in pins %}
+        <article>
+            <h1>{{ pin.title }}</h1>
+            <p>{{ pin.description }}</p>
+        </article>
+    {% else %}
+        <p>Sorry, no pins yet</p>
+    {% endfor %}
+</body>
+</html>
