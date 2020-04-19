@@ -79,7 +79,8 @@ class PinsController extends AbstractController
             $em->persist($pin);
             $em->flush();
 
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_pins_show', ['id' => $pin->getId()]);
+            // return $this->redirectToRoute('app_home');
         }
         
         return $this->render('pins/create.html.twig', [

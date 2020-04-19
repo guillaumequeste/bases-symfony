@@ -24,6 +24,7 @@
 19) Détail d'un pin
 20) Générer une erreur 404
 21) Code plus concis
+22) Liens vers le détail d'un pin
 
 
 1) - curl -sS https://get.symfony.com/cli/installer | bash     (https://symfony.com/download)
@@ -335,3 +336,12 @@
         {
             return $this->render('pins/show.html.twig', compact('pin'));
         }
+
+
+22) 'templates/pins/index.html.twig' :
+        <a href="{{ path('app_pins_show', {'id': pin.id}) }}">{{ pin.title }}</a>
+    
+    'src/Controller/PinsController.php' :
+        return $this->redirectToRoute('app_pins_show', ['id' => $pin->getId()]);
+
+    Remarque : si on utilise la fonction twig url, on a un chemin absolu (avec path, on a un chemin relatif)
