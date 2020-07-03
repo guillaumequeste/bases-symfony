@@ -25,6 +25,10 @@
 20) Générer une erreur 404
 21) Code plus concis
 22) Liens vers le détail d'un pin
+23) Propre configuration : 'php.ini'
+24) images
+
+25) Déployer sur Herokus
 
 
 1) - curl -sS https://get.symfony.com/cli/installer | bash     (https://symfony.com/download)
@@ -284,6 +288,14 @@
     
 
 16) https://twig.symfony.com/
+    Modifier 'base.html.twig'
+    Pour modifier le html sur chaque page :
+        {% extends 'base.html.twig' %}
+        {% block body %} ... {% endblock %}
+    Pour concaténer :
+        {% block title 'About Us | ' ~ parent() %}
+        ou
+        {% block title %}About Us | {{ parent() }}{% endblock %}
 
 
 17) https://php-osx.liip.ch/
@@ -345,3 +357,54 @@
         return $this->redirectToRoute('app_pins_show', ['id' => $pin->getId()]);
 
     Remarque : si on utilise la fonction twig url, on a un chemin absolu (avec path, on a un chemin relatif)
+
+
+23) On peut configurer avec nos données :
+        - créer un fichier 'php.ini' à la racine :
+            [Date]
+            date.timezone = Europe/Paris
+        - dans le template html, mettre :
+            {{ 'now'|date('H:i') }}
+        (si cela ne marche pas, relancer le serveur)
+        - créer un fichier '.user.ini' dans le dossier 'public' et y mettre le me^me contenu que 'php.ini' (pour heroku)
+
+
+24) - composer req asset
+    Créer un dossier 'img' dans le dossier 'public' et y mettre les images
+    Dans le fichier template voulu :
+        - <img src="{{ asset('/img/lune.jpeg') }}" alt="lune">
+        (on peut aussi le mettre en dur <img src="img/lune.jpeg" alt="lune">)
+
+
+25) Dans le projet :
+    - git log
+    - git add -A
+    - git commit -m "accueil"
+
+    Créer un compte sur www.heroku.com
+    Se connecter
+    Installer Heroku (ici pour Mac)
+    Dans le terminal :
+    - heroku (pour voir si heroku est bien installé)
+    - heroku update (pour mettre à jour heroku)
+    - heroku login (ensuite appuyer sur n'importe quelle touche, une fenêtre s'ouvre, cliquer sur LogIn)
+        (on peut taper 'heroku login -i' pour taper l'email et le mot de passe manuellement)
+    - heroku create bases-symfony (on peut aussi créer l'app via l'interface sur le site d'heroku -> new)
+    - heroku open (pour ouvrir l'app)
+    - git push heroku master (on a une erreur car APP_ENV=dev dans notre projet)
+    - heroku config:set APP_ENV=prod (on peut le faire via le site heroku, dans l'application, settings, reveal, créer 'KEY':'APP_ENV' et 'VALUE':'prod')
+    - heroku config:set APP_SECRET=$(php -r 'echo bin2hex(random_bytes(16));') (génère un code secret de 32 caractères, sous Windows le faire en deux temps, "php -r 'echo bin2hex(random_bytes(16));'", copier la clé générée, 'heroku config:set APP_SECRET=clégénérée')
+    - git push heroku master
+
+    Créer un fichier 'Procfile' à la racine (on peut rajouter migrations:migrate... si on a une base de données)
+    - git status
+    - git add -A
+    - git commit -m "add Procfile'
+    - git push heroku master
+
+    - composer req apache-pack
+    - y (il a créé un fichier '.htaccess)
+    - git status
+    - git add -A
+    - git commit -m "add apache"
+    - git push heroku master

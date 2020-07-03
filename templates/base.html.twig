@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app.request.locale }}">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        <main role="main">
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            <p>
+                &copy; Cpyright {{ 'now'|date('Y') }},
+                il est {{ 'now'|date('H:i') }}
+                &middot; <a href="#">Lien</a>
+                &hearts;
+            </p>
+        </footer>
+
         {% block javascripts %}{% endblock %}
     </body>
 </html>

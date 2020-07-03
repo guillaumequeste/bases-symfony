@@ -1,10 +1,7 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Pinterest Clone</title>
-</head>
-<body>
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
     <h1>All Pins</h1>
 
     {{ random(['apple', 'orange', 'citrus']) }}
@@ -22,5 +19,7 @@
     {% else %}
         <p>Sorry, no pins yet</p>
     {% endfor %}
-</body>
-</html>
+
+    <img src="{{ asset('/img/lune.jpeg') }}" alt="lune">
+
+{% endblock %}
