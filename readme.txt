@@ -402,7 +402,7 @@
     - git commit -m "add Procfile'
     - git push heroku master
 
-    - composer req apache-pack
+    - composer req apache-pack (pour que les liens marchent)
     - y (il a créé un fichier '.htaccess)
     - git status
     - git add -A
